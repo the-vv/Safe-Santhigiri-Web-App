@@ -10,8 +10,9 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link text-white" (click)="gotohome()" href="#">Home <span
                             class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" >Register</a>
-                    <a class="nav-item nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong">Details </a>
+                    <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" *ngIf="locationset">Register</a>
+                    <a class="nav-item nav-link text-white" href="#" (click)="goToList()" *ngIf="locationset">Updates</a>
+                    <a class="nav-item nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong">Details</a>
                 </div>
             </div>
         </nav>
