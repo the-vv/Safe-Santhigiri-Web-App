@@ -1,0 +1,315 @@
+<div class="container-fluid" id="body">
+    <div class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark col-12">
+            <a class="navbar-brand text-white" (click)="gotohome()">Safe Santhigiri</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link text-white" (click)="gotohome()" href="#">Home <span
+                            class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link text-white" href="#">Register</a>
+                    <a class="nav-item nav-link text-white" href="#">Details </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="row" id="main">
+        <div class="text-white m-auto col-12 w3-animate-zoom" *ngIf="home">
+            <p class="h1 text-center">Covid-19 Updates - Safe Santhigiri</p>
+            <p class="h5 text-center">Be safe by getting detailed covid-19 updates (Testing Phase)</p>
+            <p class="h6 text-center">Let's save our collage from covid-19 together</p>
+
+            <div class="text-white text-center">Please
+                <a type="button" class="text-primary" data-toggle="modal" data-target="#exampleModalLong">
+                    Read this notes
+                </a> before proceeding
+                <!-- Modal -->
+                <div class="text-left modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content text-dark">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-dark" id="exampleModalLongTitle">Important Notes!</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="strong modal-body">
+                                <h5 class="h4">
+                                   Testing Phase
+                                </h5>
+                                <p class="h6">
+                                   This site is currently at test phase. so please test this by providing some fake data.
+                                </p>
+                                <h5 class="h5">
+                                    What is this?
+                                </h5>
+                                <p>
+                                    This app helps people to get latest updates of COVID-19 from the people who are
+                                    registered here. You can also get the location of the nearest area where anyone is
+                                    affected by COVID-19 or in Quarentine.
+                                </p>
+                                <h5 class="h5">
+                                    How to register
+                                </h5>
+                                <p>
+                                    You can regster here by pressing Register here button. then you need to provide the
+                                    required fields.then press the submit button. <br>
+                                    Pls note down your private id when registering for future uses like updating or deleting.
+                                    if you select quarentine, you have to orivide date. if the date is more than 14 days old, systemwill automatically assign it as Quarentine (Expired)
+                                </p>
+                                <h5 class="h5">
+                                    View Updates
+                                </h5>
+                                <p>
+                                    this feature hels you to get the latest updates of people who registered here.
+                                </p>
+                                <h5 class="h5">
+                                    where is the options?
+                                </h5>
+                                <p>
+                                    if you can's see any buttons, it may be because of two reasons which are your
+                                    internet connection is too slow or it is taking too long to fetch your location.
+                                    Then just wait for the buttons to be appeared.
+                                </p>
+                                <h5 class="h5">
+                                    Why Location needed
+                                </h5>
+                                <p>
+                                    Location information is used to get the nearest location of COVID-19 updates using
+                                    your location.
+                                </p>
+                                <h5 class="h5">
+                                    What about Privacy
+                                </h5>
+                                <p>
+                                    We care your privacy. we dont reveal your private details. you can also make changes
+                                    or delete your data in the databse.
+                                </p>
+                                <h5 class="h5">
+                                    Other features
+                                </h5>
+                                <ul>
+                                    <li>
+                                        Every one have a non repeating private ID:
+                                        <p>
+                                            When registering you will get a private id. Take note it down for the future
+                                            uses like deleting or updating your records.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        Auto expiring Quarentine, which auto expires the quarentine date if the date is
+                                        more than 14 days old.
+                                    </li>
+                                    <li>
+                                        You can edit or delete your data once you have entered your data.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="text-white text-center mt-2" *ngIf="locationset">
+                <button type="button" class="shadow btn btn-success mx-3 my-1 px-5 py-2" (click)="gotoview()">View
+                    updates</button>
+                <button type="button" class="shadow btn btn-danger mx-3 my-1 px-5 py-2" (click)="gotoadd()">Register Here</button>
+                <a href="#" class="mt-2 d-block col-md-2 col-3 col-lg-1 mx-auto badge badge-secondary"
+                    (click)="editmode()">Make edits</a>
+            </div>
+            <div class="form-group text-center mt-3" *ngIf="locationset">
+                <label for="" class="col-12">Total Updates: <span>{{total}}</span></label>
+                <label for="" class="col-12">Nearest non safe area: <span>{{sdistance}} KM Away</span></label>
+                <iframe *ngIf='map' class='col-md-6 mx-auto my-0 rounded-pill' height='20%' id='mapcanvas'
+                    [src]="url | safe" frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+                    <!-- <div class="zxos8_gm">Not sure if you have <a href="https://www.vouchersort.co.uk/hush-uk.com">found
+                            it but hotukdeals</a> is sometimes not the best place</div>
+                    <div style='overflow:hidden;'>
+                        <div id='gmap_canvas' style='height:100%;width:100%;'></div>
+                    </div>
+                    <div><small>Powered by <a href="https://www.embedgooglemap.co.uk">Embed Google Map</a></small></div> -->
+                </iframe>
+            </div>
+            <div class="form-group text-center mt-5" *ngIf="!locationset">
+                <div class="col-12">Initializing Databases and Location...</div>
+                <img src="../assets/loading.gif" width="70px" class="mt-3" alt="">
+            </div>
+        </div>
+        <div class="text-white col-12" id="bottom" *ngIf="home">
+            <footer>
+                <p class="text-center text-muted">
+                    &copy; Vishnu Vinod -- vishnuvinod2772001@gmail.com
+                </p>
+            </footer>
+        </div>
+
+
+        <div class="container m-auto" *ngIf="!home">
+            <h5 class="card-header bg-primary text-center rounded-top text-white">
+                <button class="btn btn-success btn-sm text-white float-left" (click)="gotohome()">Home</button>
+                Covid-19 Updates
+            </h5>
+            <div class="card-body border border-secondary rounded-bottom text-black pl-5 pr-5">
+                <form *ngIf="addType" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row text-white w3-animate-zoom" *ngIf="!editform">
+                        <div class="form-group col-md-2">
+                            <label for="">Your Private ID</label>
+                            <input type="text" formControlName="id" class="form-control" disabled />
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="">Full Name</label>
+                            <input placeholder="Full Name" type="text" formControlName="Name" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="genderInput">Gender</label>
+                            <select id="genderInput" class="form-control" formControlName="gender"
+                                [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                                <option value="" selected>Choose</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="">Age</label>
+                            <input placeholder="Age" type="number" formControlName="age" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Phone Number</label>
+                            <input placeholder="Phone Number" type="number" formControlName="phone" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Email Id (optional)</label>
+                            <input placeholder="Email" type="text" formControlName="email" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Admission Number</label>
+                            <input placeholder="Admission Number" type="text" formControlName="adno"
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.adno.errors }" />
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="exampleFormControlTextarea1">Your Health Condition</label>
+                            <textarea formControlName="feedback" class="form-control" rows="4"
+                                placeholder="Briefely Type your Health Condition here"></textarea>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'col-md-6': !qflag, 'col-md-3': qflag }">
+                            <label for="genderInput">Covid-19 Cituation</label>
+                            <select id="genderInput" class="form-control" formControlName="condition"
+                                (change)="qscheck()">
+                                <option value="">Choose</option>
+                                <option value="Safe">Safe</option>
+                                <option value="Quarentine">In Quarentine</option>
+                                <option value="Affected">Affected</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3" *ngIf="qflag">
+                            <label for="">Start Date</label>
+                            <input formControlName="qsdate" class="form-control" type="date" placeholder="" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="">Your State</label>
+                            <input placeholder="State" type="text" formControlName="state" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.lat.errors }" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="">Pin Code</label>
+                            <input placeholder="Pin Code" type="number" formControlName="pin" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.pin.errors }" />
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="">Latitude</label>
+                            <input placeholder="Use Locate Button" type="text" formControlName="lat"
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lat.errors }" />
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="">Longitude</label>
+                            <input placeholder="Use Locate Button" type="text" formControlName="lon"
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lon.errors }" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="">Get Location</label>
+                            <a class="btn btn-success col-12" (click)="putLocation()">Locate</a>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 text-danger" *ngIf="regerrors">
+                        <label for="">Please correct the errors in the form or fill all the necessory fields</label>
+                    </div>
+                    <div class="text-center" *ngIf="!editform">
+                        <button class="btn btn-primary mr-1" type="submit">Register</button>
+                        <button class="btn btn-secondary ml-1" type="reset" (click)="onReset()">Cancel</button>
+                    </div>
+                </form>
+                <form *ngIf="!addType">
+                    <div *ngFor="let item of items; let pinurlid = index"
+                        class="border border-primary form-group col-12 rounded-lg w3-animate-zoom">
+                        <div class="form-row text-white mt-3">
+                            <div class="form-group col-6 col-md-3 text-right">
+                                <label>Pincode:</label>
+                            </div>
+                            <div class="form-group col-6 col-md-3 text-left">
+                                <label>{{item.value.pin}}</label>
+                            </div>
+                            <div class="form-group col-6 col-md-3 text-right">
+                                <label>Covid-19 Situation:</label>
+                            </div>
+                            <div class="form-group col-6 col-md-3 text-left pt-2 pt-md-0">
+                                <label>{{item.value.condition}}</label>
+                            </div>
+                            <iframe *ngIf='map' class='col-12 text-center rounded-lg mx-auto pb-2' height='100%'
+                                id='mapcanvas' [src]="pinlist[pinurlid] | safe" frameborder='0' scrolling='no'
+                                marginheight='0' marginwidth='0'>
+                                <!-- <div class="zxos8_gm">Not sure if you have <a 
+                                        href="https://www.vouchersort.co.uk/hush-uk.com">found
+                                        it but hotukdeals</a> is sometimes not the best place</div>
+                                <div style='overflow:hidden;'>
+                                    <div id='gmap_canvas' style='height:100%;width:100%;'></div>
+                                </div>
+                                <div><small>Powered by <a href="https://www.embedgooglemap.co.uk">Embed Google
+                                            Map</a></small></div> -->
+                            </iframe>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="editForm" *ngIf="editform">
+                    <div class="form-group form-row rounded-lg w3-animate-zoom">
+                        <div class="form-group col-md-6 text-white">
+                            <label for="">Enter your Private ID</label>
+                            <input formControlName="editbox" placeholder="ID" type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6 text-white">
+                            <label for="genderInput">Covid-19 Cituation (Only For Updation)</label>
+                            <select id="genderInput" class="form-control" formControlName="editcondition">
+                                <!-- <option value="">Choose</option> -->
+                                <option value="Safe">Safe</option>
+                                <option value="Quarentine">In Quarentine</option>
+                                <option value="Affected">Affected</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 text-info" *ngIf="updtstatus">
+                        <label>{{updtstatus}}</label> 
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-success mr-1" type="" (click)="updateval()">Update</button>
+                        <button class="btn btn-danger ml-1" type="" (click)="deleteval()">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
