@@ -1,7 +1,7 @@
 <div class="container-fluid" id="body">
     <div class="fixed-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-dark col-12">
-            <a class="navbar-brand text-white" (click)="gotohome()">Safe Santhigiri</a>
+            <a class="navbar-brand text-white" (click)="gotohome()">Safe Santhigiri</a>            
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -10,9 +10,12 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link text-white" (click)="gotohome()" href="#">Home <span
                             class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" *ngIf="locationset">Register </a>
-                    <a class="nav-item nav-link text-white" href="#" (click)="goToList()" *ngIf="locationset">Updates </a>
-                    <a class="nav-item nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong">Details</a>
+                    <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" *ngIf="locationset">Register
+                    </a>
+                    <a class="nav-item nav-link text-white" href="#" (click)="goToList()" *ngIf="locationset">Updates
+                    </a>
+                    <a class="nav-item nav-link text-white" href="#" data-toggle="modal"
+                        data-target="#exampleModalLong">Details</a>
                 </div>
             </div>
         </nav>
@@ -40,10 +43,11 @@
                             </div>
                             <div class="strong modal-body">
                                 <h5 class="h4">
-                                   Testing Phase
+                                    Testing Phase
                                 </h5>
                                 <p class="h6">
-                                   This site is currently at test phase. so please test this by providing some fake data.
+                                    This site is currently at test phase. so please test this by providing some fake
+                                    data.
                                 </p>
                                 <h5 class="h5">
                                     What is this?
@@ -59,8 +63,10 @@
                                 <p>
                                     You can regster here by pressing Register here button. then you need to provide the
                                     required fields.then press the submit button. <br>
-                                    Pls note down your private id when registering for future uses like updating or deleting.
-                                    if you select quarentine, you have to orivide date. if the date is more than 14 days old, systemwill automatically assign it as Quarentine (Expired)
+                                    Pls note down your private id when registering for future uses like updating or
+                                    deleting.
+                                    if you select quarentine, you have to orivide date. if the date is more than 14 days
+                                    old, systemwill automatically assign it as Quarentine (Expired)
                                 </p>
                                 <h5 class="h5">
                                     View Updates
@@ -122,7 +128,8 @@
             <div class="text-white text-center mt-2" *ngIf="locationset">
                 <button type="button" class="shadow btn btn-success mx-3 my-1 px-5 py-2" (click)="gotoview()">View
                     updates</button>
-                <button type="button" class="shadow btn btn-danger mx-3 my-1 px-5 py-2" (click)="gotoadd()">Register Here</button>
+                <button type="button" class="shadow btn btn-danger mx-3 my-1 px-5 py-2" (click)="gotoadd()">Register
+                    Here</button>
                 <a href="#" class="mt-2 d-block col-md-2 col-3 col-lg-1 mx-auto badge badge-secondary"
                     (click)="editmode()">Edit Your Profile</a>
             </div>
@@ -299,7 +306,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6 text-info" *ngIf="updtstatus">
-                        <label>{{updtstatus}}</label> 
+                        <label>{{updtstatus}}</label>
                     </div>
                     <div class="text-center">
                         <button class="btn btn-success mr-1" type="" (click)="updateval()">Update</button>

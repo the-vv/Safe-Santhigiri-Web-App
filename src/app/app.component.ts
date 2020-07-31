@@ -8,20 +8,7 @@ import { CompileShallowModuleMetadata, ThrowStmt } from '@angular/compiler';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { promise } from 'protractor';
-
-// import { Injectable } from '@angular/core';
-// import { SwUpdate } from '@angular/service-worker';
-
-// @Injectable()
-// export class PwaService {
-//   constructor(private swUpdate: SwUpdate) {
-//     swUpdate.available.subscribe(event => {
-//       if (askUserToUpdate()) {
-//         window.location.reload();
-//       }
-//     });
-//   }
-// }
+  
 
 @Pipe({
   name: 'safe'
