@@ -3,12 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { CompileShallowModuleMetadata, ThrowStmt } from '@angular/compiler';
 
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { promise } from 'protractor';
-  
+
 
 @Pipe({
   name: 'safe'
@@ -41,6 +39,13 @@ export class AppComponent {
   url = 'https://maps.google.com/maps?q=kerala&Roadmap&z=10&ie=UTF8&iwloc=&output=embed';
   map = true;
   total = NaN;
+  loadingStatus = "Initializing Databases and Location...";
+  loadingStatusImg = "../assets/loading.gif";
+  loadingStatusErrorImg = "../assets/nonetwork.png";
+
+  status = 'ONLINE'; //initializing as online by default
+  isConnected = true;
+
   locationset = false;
   editform = false;
   updtstatus = "";
@@ -61,6 +66,13 @@ export class AppComponent {
   constructor(private db: AngularFireDatabase,
     private formBuilder: FormBuilder,
     private ref: ChangeDetectorRef) {
+      
+      if(navigator.onLine){
+        this.loadingStatus = this.loadingStatus + " Network Status: OK";
+       } else {
+         this.loadingStatus = "";
+        this.loadingStatusImg = this.loadingStatusErrorImg;
+       }
   }
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
