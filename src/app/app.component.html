@@ -10,8 +10,8 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link text-white" (click)="gotohome()" href="#">Home <span
                             class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" *ngIf="locationset">Register</a>
-                    <a class="nav-item nav-link text-white" href="#" (click)="goToList()" *ngIf="locationset">Updates</a>
+                    <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" *ngIf="locationset">Register </a>
+                    <a class="nav-item nav-link text-white" href="#" (click)="goToList()" *ngIf="locationset">Updates </a>
                     <a class="nav-item nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong">Details</a>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                     updates</button>
                 <button type="button" class="shadow btn btn-danger mx-3 my-1 px-5 py-2" (click)="gotoadd()">Register Here</button>
                 <a href="#" class="mt-2 d-block col-md-2 col-3 col-lg-1 mx-auto badge badge-secondary"
-                    (click)="editmode()">Make edits</a>
+                    (click)="editmode()">Edit Your Profile</a>
             </div>
             <div class="form-group text-center mt-3" *ngIf="locationset">
                 <label for="" class="col-12">Total Updates: <span>{{total}}</span></label>
