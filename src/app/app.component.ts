@@ -344,7 +344,7 @@ export class AppComponent {
   updateval() {
     if (!this.editForm.controls.editbox.value) {
       // console.log('Please Enter a private id');
-      this.updtstatus = "Please Enter Your Private ID";
+      this.updtstatus = "Please Enter Your Private ID and select condition";
       return;
     }
     else {
@@ -386,7 +386,7 @@ export class AppComponent {
   deleteval() {
     if (!this.editForm.controls.editbox.value) {
       // console.log('Please Enter a private id');
-      this.updtstatus = "Please Enter Your Private ID and select condition";
+      this.updtstatus = "Please Enter Your Private ID";
       return;
     }
     // console.log(this.editForm.controls.editbox.value);
