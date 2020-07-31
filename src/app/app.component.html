@@ -130,8 +130,8 @@
                     updates</button>
                 <button type="button" class="shadow btn btn-danger mx-3 my-1 px-5 py-2" (click)="gotoadd()">Register
                     Here</button>
-                <a href="#" class="mt-2 d-block col-md-2 col-5 col-sm-3 col-lg-1 mx-auto btn btn-sm btn-secondary"
-                    (click)="editmode()">Edit Your Profile</a>
+                    <button type="button" class="shadow btn btn-secondary btn-sm d-block mx-auto mt-2 px-3" (click)="editmode()">Edit Your Profile                        
+                    </button>
             </div>
             <div class="form-group text-center mt-3" *ngIf="locationset">
                 <label for="" class="col-12">Total Updates: <span>{{total}}</span></label>
@@ -262,16 +262,16 @@
                     <div *ngFor="let item of items; let pinurlid = index"
                         class="border border-primary form-group col-12 rounded-lg w3-animate-zoom">
                         <div class="form-row text-white mt-3">
-                            <div class="form-group col-6 col-md-3 text-right">
+                            <div class="form-group col-6 col-md-auto text-left">
                                 <label>Pincode:</label>
                             </div>
                             <div class="form-group col-6 col-md-3 text-left">
                                 <label>{{item.value.pin}}</label>
                             </div>
-                            <div class="form-group col-6 col-md-3 text-right">
+                            <div class="form-group col-6 col-md-auto text-left align-self-center">
                                 <label>Covid-19 Situation:</label>
                             </div>
-                            <div class="form-group col-6 col-md-3 text-left pt-2 pt-md-0">
+                            <div class="form-group col-6 col-md-auto text-left pt-md-0 align-self-center">
                                 <label>{{item.value.condition}}</label>
                             </div>
                             <iframe *ngIf='map' class='col-12 text-center rounded-lg mx-auto pb-2' height='100%'
