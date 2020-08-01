@@ -2,7 +2,11 @@
 
     <div class="fixed-top"> <!-- Nav Bar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-dark col-12">
-            <a class="navbar-brand text-white" (click)="gotohome()">Safe Santhigiri</a>            
+            <a class="navbar-brand text-white" (click)="gotohome()">Safe Santhigiri</a> 
+
+            <button class="nav-item text-white btn btn-sm btn-success mr-auto" *ngIf="promptEvent" (click)="installPwa()">Install
+            </button>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -11,9 +15,9 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link text-white" (click)="gotohome()" href="#">Home <span
                             class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" *ngIf="locationset">Register
+                    <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" *ngIf="locationset && Online">Register
                     </a>
-                    <a class="nav-item nav-link text-white" href="#" (click)="gotoview()" *ngIf="locationset">Updates
+                    <a class="nav-item nav-link text-white" href="#" (click)="gotoview()" *ngIf="locationset && Online">Updates
                     </a>
                     <a class="nav-item nav-link text-white" href="#" data-toggle="modal"
                         data-target="#exampleModalLong">Details</a>

@@ -60,11 +60,17 @@ export class AppComponent {
   public items: Array<any> = [];
   public location: Array<any> = [];
   public pinlist: Array<any> = [];
-  public itemRef: firebase.database.Reference
+  public itemRef: firebase.database.Reference;
+  public promptEvent: any;
 
   constructor(private db: AngularFireDatabase,
     private formBuilder: FormBuilder,
     private ref: ChangeDetectorRef) {
+
+      window.addEventListener('beforeinstallprompt', event => {
+        this.promptEvent = event;
+      });
+
     if (navigator.onLine) {
       this.loadingStatus = this.loadingStatus + "<br>Network Status: OK";
     }
@@ -98,7 +104,9 @@ export class AppComponent {
   }
   get f() { return this.registerForm.controls; }
 
-
+  installPwa(): void {
+    this.promptEvent.prompt();
+  }
 
   TimerFunct() {
     setTimeout(() => {
