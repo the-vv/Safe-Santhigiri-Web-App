@@ -2,6 +2,7 @@
     background-image: url(../assets/wall.jpg);
     background-size: cover;
     background-position: center;
+    overscroll-behavior: none;
 }
 #main{
     min-height:100vh;
