@@ -1,5 +1,6 @@
-<div class="container-fluid" id="body">
-    <div class="fixed-top">
+<div class="container-fluid" id="body"> <!-- Main container -->
+
+    <div class="fixed-top"> <!-- Nav Bar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-dark col-12">
             <a class="navbar-brand text-white" (click)="gotohome()">Safe Santhigiri</a>            
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -12,7 +13,7 @@
                             class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link text-white" href="#" (click)="gotoadd()" *ngIf="locationset">Register
                     </a>
-                    <a class="nav-item nav-link text-white" href="#" (click)="goToList()" *ngIf="locationset">Updates
+                    <a class="nav-item nav-link text-white" href="#" (click)="gotoview()" *ngIf="locationset">Updates
                     </a>
                     <a class="nav-item nav-link text-white" href="#" data-toggle="modal"
                         data-target="#exampleModalLong">Details</a>
@@ -20,6 +21,8 @@
             </div>
         </nav>
     </div> 
+
+    <!-- Home Page Starts here -->
     <div class="row" id="main">
         <div class="text-white m-auto col-12 w3-animate-zoom" *ngIf="home">
             <p class="h1 text-center">Covid-19 Updates - Safe Santhigiri</p>
@@ -30,6 +33,7 @@
                 <a type="button" class="text-primary" data-toggle="modal" data-target="#exampleModalLong">
                     Read this notes
                 </a> before proceeding
+
                 <!-- Modal -->
                 <div class="text-left modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -124,7 +128,7 @@
                 </div>
             </div>
 
-
+            <!-- Main page controlls -->
             <div class="text-white text-center mt-2" *ngIf="locationset">
                 <button type="button" class="shadow btn btn-success mx-3 my-1 px-5 py-2" (click)="gotoview()">View
                     updates</button>
@@ -148,18 +152,22 @@
             </div>
             <div class="form-group text-center mt-5" *ngIf="!locationset">
                 <div class="col-12">{{loadingStatus}}</div>
-                <img src="{{loadingStatusImg}}" width="70px" class="mt-3" alt="Error Occured">
+                <img src="../assets/loading.gif" class="col-1 mt-3 img-fluid" alt="Error Occured">
+            </div>
+            <div class="form-group text-center mt-5" *ngIf="!Online">
+                <img src="../assets/nonetwork.png" class="col-2 mt-3 img-fluid" alt="Error Occured">
             </div>
         </div>
+
         <div class="text-white col-12" id="bottom" *ngIf="home">
             <footer>
                 <p class="text-center text-muted">
                     &copy; Vishnu Vinod -- vishnuvinod2772001@gmail.com
                 </p>
             </footer>
-        </div>
+        </div>  <!-- Homepage ends here -->
 
-
+        <!-- Registration page starts here  -->
         <div class="container m-auto" *ngIf="!home">
             <h5 class="card-header bg-primary text-center rounded-top text-white">
                 <button class="btn btn-success btn-sm text-white float-left" (click)="gotohome()">Home</button>
@@ -257,7 +265,9 @@
                         <button class="btn btn-primary mr-1" type="submit">Register</button>
                         <button class="btn btn-secondary ml-1" type="reset" (click)="onReset()">Cancel</button>
                     </div>
-                </form>
+                </form><!-- Registration page ends here -->
+
+                <!-- Details Page -->
                 <form *ngIf="!addType">
                     <div *ngFor="let item of items; let pinurlid = index"
                         class="border border-primary form-group col-12 rounded-lg w3-animate-zoom">
@@ -288,7 +298,9 @@
                             </iframe>
                         </div>
                     </div>
-                </form>
+                </form> <!-- Details page ends here -->
+
+                <!-- Editing page starts here -->
                 <form [formGroup]="editForm" *ngIf="editform">
                     <div class="form-group form-row rounded-lg w3-animate-zoom">
                         <div class="form-group col-md-6 text-white">
@@ -312,7 +324,8 @@
                         <button class="btn btn-success mr-1" type="" (click)="updateval()">Update</button>
                         <button class="btn btn-danger ml-1" type="" (click)="deleteval()">Delete</button>
                     </div>
-                </form>
+                </form> <!-- end of editing page -->
+
             </div>
         </div>
 

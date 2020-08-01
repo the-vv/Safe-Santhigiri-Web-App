@@ -40,11 +40,7 @@ export class AppComponent {
   map = true;
   total = NaN;
   loadingStatus = "Initializing Databases and Location...";
-  loadingStatusImg = "../assets/loading.gif";
-  loadingStatusErrorImg = "../assets/nonetwork.png";
-
-  status = 'ONLINE'; //initializing as online by default
-  isConnected = true;
+  Online = true;
 
   locationset = false;
   editform = false;
@@ -53,9 +49,11 @@ export class AppComponent {
   public editid = 100;
   public static lattemp = '0';
   public static lottemp = '0';
+
   refresh(): void {
     window.location.reload();
   }
+
   public addType: boolean = true;
   public home: boolean = true;  //false for temporary
   public items: Array<any> = [];
@@ -66,13 +64,10 @@ export class AppComponent {
   constructor(private db: AngularFireDatabase,
     private formBuilder: FormBuilder,
     private ref: ChangeDetectorRef) {
-      
-      if(navigator.onLine){
-        this.loadingStatus = this.loadingStatus + " Network Status: OK";
-       } else {
-         this.loadingStatus = "";
-        this.loadingStatusImg = this.loadingStatusErrorImg;
-       }
+    if (navigator.onLine) {
+      this.loadingStatus = this.loadingStatus + " Network Status: OK";
+    }
+
   }
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -112,6 +107,7 @@ export class AppComponent {
         // console.log(AppComponent.lottemp, AppComponent.lattemp);
         this.qdatefix();
         this.distancecalc();
+        this.Online = true;
         this.locationset = true;
       }
       else {
@@ -119,6 +115,12 @@ export class AppComponent {
         // this.getLocation();
         this.TimerFunct();
       }
+
+      if (!navigator.onLine) {
+        this.loadingStatus = "";
+        this.Online = false;
+      }
+
     }, 100);
   }
 
