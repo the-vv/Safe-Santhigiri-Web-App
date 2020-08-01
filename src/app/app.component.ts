@@ -7,7 +7,7 @@ import * as firebase from 'firebase/app';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-
+// for map url 
 @Pipe({
   name: 'safe'
 })
@@ -32,6 +32,7 @@ export class AppComponent {
   editForm: FormGroup;
   submitted = false;
   sdistance = 0;
+  scondition = ""
   slon = 0;
   slat = 0;
   qflag = false;
@@ -134,6 +135,7 @@ export class AppComponent {
   distancecalc() {
     if (this.items.length > 0 && this.items[0].value.condition != "Safe") {
       this.sdistance = this.distance(this.items[0].value.lat, this.items[0].value.lon, AppComponent.lattemp, AppComponent.lottemp);
+      this.scondition = this.items[0].value.condition;
       // console.log(this.sdistance)
       this.url = 'https://maps.google.com/maps?q=' + this.items[0].value.pin + '&Roadmap&z=10&ie=UTF8&iwloc=&output=embed'
       this.slon = this.items[0].value.lon;
@@ -151,6 +153,7 @@ export class AppComponent {
         // console.log(td);
         if (this.sdistance == 0 || td < this.sdistance) {
           this.sdistance = td;
+          this.scondition = this.items[i].value.condition;
           this.slon = this.items[i].value.lon;
           this.slat = this.items[i].value.lat;
           // console.log("Distance: ", td);
@@ -166,6 +169,7 @@ export class AppComponent {
     // console.log(this.pinlist);
   }
 
+  // fetch data from Database 
   getAll() {
     this.itemRef = firebase.database().ref('/CovidDB/');
     this.itemRef.on('value', itemSnapshot => {
@@ -187,6 +191,7 @@ export class AppComponent {
     });
   }
 
+  // find the distance between two locations
   distance(lat1, lon1, lat2, lon2, unit = "K") {
     // console.log(lat1)
     // console.log(lon1)
@@ -217,6 +222,7 @@ export class AppComponent {
     }
   }
 
+  // go to edit form
   editmode() {
     this.updtstatus = "";
     this.home = false;
@@ -225,6 +231,7 @@ export class AppComponent {
 
   public regerrors = false;
 
+  // check for form errors and push data to database
   onSubmit() {
     this.submitted = true;
     if (this.registerForm.invalid) {
@@ -238,23 +245,30 @@ export class AppComponent {
     this.addType = false
     this.onReset();
   }
+
+  // reset form
   onReset() {
     this.submitted = false;
     this.regerrors = false;
     this.registerForm.reset();
     this.gotohome();
   }
+
+  // go back to home
   goBack() {
     this.addType = true;
     this.editform = false;
     this.regerrors = false;
   }
+
+  // go to details view
   goToList() {
     this.addType = false;
     this.editform = false;
     this.regerrors = false;
   }
 
+  // go to regirtration form
   gotoadd() {
     this.regerrors = false;
     this.editform = false;
@@ -270,6 +284,7 @@ export class AppComponent {
     this.registerForm.controls.id.setValue(AppComponent.YourID);
   }
 
+  // go to updates view
   gotoview() {
     this.regerrors = false;
     this.home = false;
@@ -278,6 +293,7 @@ export class AppComponent {
     // this.distancecalc();
   }
 
+  // go to home
   gotohome() {
     this.regerrors = false;
     this.home = true;
@@ -285,7 +301,7 @@ export class AppComponent {
     this.editform = false;
   }
 
-
+  // update current location on form
   putLocation() {
     this.registerForm.controls.lat.setValue(AppComponent.lattemp);
     this.registerForm.controls.lon.setValue(AppComponent.lottemp);
@@ -293,10 +309,9 @@ export class AppComponent {
     //   lat:AppComponent.lattemp,
     //   lon:AppComponent.lottemp 
     // })
-
-
   }
 
+  // fetching location
   getLocation() {
     navigator.geolocation.watchPosition(function (position) {
     },
@@ -315,6 +330,7 @@ export class AppComponent {
 
   temprec = NaN;
 
+  // used to format date in html input format
   formatDate() {
     var d = new Date(),
       month = '' + (d.getMonth() + 1),
@@ -329,6 +345,7 @@ export class AppComponent {
     return [year, month, day].join('-');
   }
 
+  // checks if quarentine passed 14 days and set as expired if it is
   qdatefix() {
     for (var i = 0; i < this.items.length; i++) {
       if (this.items[i].value.qsdate) {
@@ -355,7 +372,7 @@ export class AppComponent {
     }
   }
 
-
+  // used to update data in the database
   updateval() {
     if (!this.editForm.controls.editbox.value) {
       // console.log('Please Enter a private id');
@@ -398,6 +415,7 @@ export class AppComponent {
     }
   }
 
+  // delete value in the database
   deleteval() {
     if (!this.editForm.controls.editbox.value) {
       // console.log('Please Enter a private id');
@@ -424,6 +442,7 @@ export class AppComponent {
     }
   }
 
+  // set current location on variables
   showPosition(position) {
     // console.log("location set");
     // console.log(position.coords.latitude);

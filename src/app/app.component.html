@@ -139,7 +139,7 @@
             </div>
             <div class="form-group text-center mt-3" *ngIf="locationset">
                 <label for="" class="col-12">Total Updates: <span>{{total}}</span></label>
-                <label for="" class="col-12">Nearest non safe area: <span>{{sdistance}} KM Away</span></label>
+                <label for="" class="col-12">Nearest non safe area: <span>{{sdistance}} KM Away ({{scondition}})</span></label>
                 <iframe *ngIf='map' class='col-md-6 mx-auto my-0 rounded-pill' height='20%' id='mapcanvas'
                     [src]="url | safe" frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
                     <!-- <div class="zxos8_gm">Not sure if you have <a href="https://www.vouchersort.co.uk/hush-uk.com">found
