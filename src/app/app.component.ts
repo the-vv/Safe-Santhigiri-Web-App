@@ -65,7 +65,7 @@ export class AppComponent {
     private formBuilder: FormBuilder,
     private ref: ChangeDetectorRef) {
     if (navigator.onLine) {
-      this.loadingStatus = this.loadingStatus + " Network Status: OK";
+      this.loadingStatus = this.loadingStatus + "<br>Network Status: OK";
     }
 
   }
