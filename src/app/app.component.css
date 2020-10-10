@@ -4,6 +4,9 @@
     background-position: center;
     overscroll-behavior: none;
 }
+.navbar-brand{
+  font-family: 'Secular One', sans-serif;
+}
 #main{
     min-height:100vh;
     background-color: rgba(000, 000, 000, 0.75);
